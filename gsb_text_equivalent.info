@@ -1,0 +1,6 @@
+name = GSB Text Equivalent
+core = 7.x
+package = GSB
+version = 7.x-5.07
+project = gsb_text_equivalent
+

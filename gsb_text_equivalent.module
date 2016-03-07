@@ -1,0 +1,51 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function gsb_text_equivalent_menu() {
+  $items = array();
+  $items['text-equivalent/%/%'] = array(
+    'description' => 'View Text Equivalent.',
+    'page callback' => 'gsb_text_equivalent_view_text_equivalent',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Callback function.
+ */
+function gsb_text_equivalent_view_text_equivalent($type, $id) {
+  $entity = entity_load($type, array($id));
+  // add CSS
+  drupal_add_css(drupal_get_path('theme', 'gsb_theme') . '/css/style.css');
+  $display = array('label' => 'hidden');
+  return field_view_field($type, $entity[$id], 'field_text_equivalent', $display);
+}
+
+/**
+ * Implements hook_custom_theme()
+ */
+function gsb_text_equivalent_custom_theme() {
+  // set the theme to starl
+  $args = explode('/', current_path());
+  if ($args[0] == 'text-equivalent') {
+    return 'stark';
+  }
+}
+
+/**
+ * Implements hook_page_alter()
+ */
+function gsb_text_equivalent_page_alter(&$page) {
+  // hide all the region except content for clean html
+  $args = explode('/', current_path());
+  if ($args[0] == 'text-equivalent') {
+    foreach (element_children($page) as $region) {
+      if ($region != 'content') {
+        unset($page[$region]);
+      }
+    }
+  }
+}
