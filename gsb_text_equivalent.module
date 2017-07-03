@@ -48,6 +48,7 @@ function gsb_text_equivalent_page_alter(&$page) {
       }
     }
   }
+  
   // add the metatag title for the text equivalent page
   if (!empty($page['content']['system_main']['#object']->field_title['und'][0])) {
     $title = $page['content']['system_main']['#object']->field_title['und'][0]['safe_value'];
@@ -59,5 +60,8 @@ function gsb_text_equivalent_page_alter(&$page) {
     $title = $page['content']['system_main']['#object']->title;
     $title_part2 = $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2];
     $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2] = $title . ' ' . $title_part2;
+  }
+  else if(empty($page['content']['system_main']['#object']->field_title['und'][0]) ){
+    drupal_set_title('');
   }
 }
