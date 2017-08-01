@@ -54,6 +54,9 @@ function gsb_text_equivalent_page_alter(&$page) {
     $title = $page['content']['system_main']['#object']->field_title['und'][0]['safe_value'];
     drupal_set_title($title);
     $title_part2 = $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2];
+    if($title_part2 != ""){
+      $title_part2 = str_replace('Home', '', $title_part2);
+    }
     $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2] = $title . ' ' . $title_part2;
   }
   else if (!empty($page['content']['system_main']['#bundle']) && $page['content']['system_main']['#bundle'] == 'image') {
@@ -61,7 +64,11 @@ function gsb_text_equivalent_page_alter(&$page) {
     $title_part2 = $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2];
     $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2] = $title . ' ' . $title_part2;
   }
-  else if(empty($page['content']['system_main']['#object']->field_title['und'][0]) ){
-    //drupal_set_title('');
+  else if(empty($page['content']['system_main']['#object']->field_title['und'][0]) ) {
+    if($page['content']['system_main']['#bundle'] == 'resource_image') {
+        drupal_set_title('');
+        $title_part2 = $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2];
+        $page['content']['metatags']['global']['title']['#attached']['metatag_set_preprocess_variable'][0][2] = substr($title_part2, 6);;
+    }
   }
 }
