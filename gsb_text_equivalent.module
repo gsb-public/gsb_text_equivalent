@@ -1,5 +1,10 @@
 <?php
 /**
+ * @file
+ * GSB Text Equivalent, provides readable text version of website assets.
+ */
+
+/**
  * Implements hook_menu().
  */
 function gsb_text_equivalent_menu() {
@@ -18,7 +23,7 @@ function gsb_text_equivalent_menu() {
  */
 function gsb_text_equivalent_view_text_equivalent($type, $id) {
   $entity = entity_load($type, array($id));
-  // add CSS
+  // Add CSS.
   drupal_add_css(drupal_get_path('theme', 'gsb_theme') . '/css/style.css');
   $display = array('label' => 'hidden');
   return field_view_field($type, $entity[$id], 'field_text_equivalent', $display);
