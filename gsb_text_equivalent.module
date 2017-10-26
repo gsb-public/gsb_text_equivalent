@@ -25,18 +25,17 @@ function gsb_text_equivalent_view_text_equivalent($type, $id) {
 }
 
 /**
- * Implements hook_custom_theme()
+ * Implements hook_custom_theme().
  */
 function gsb_text_equivalent_custom_theme() {
-  // set the theme to starl
+  // Set the theme to stark.
   $args = explode('/', current_path());
   if ($args[0] == 'text-equivalent') {
     return 'stark';
   }
 }
-
 /**
- * Implements hook_page_alter()
+ * Implements hook_page_alter().
  */
 function gsb_text_equivalent_page_alter(&$page) {
   // Hide all the region except content for clean html.
