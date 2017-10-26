@@ -20,6 +20,14 @@ function gsb_text_equivalent_menu() {
 
 /**
  * Callback function.
+ *
+ * @param string $type
+ *   $entity_type: The entity type to load, e.g. node or user.
+ * @param int $id
+ *   ID of entity to load.
+ *
+ * @return array
+ *   Render array for the value of a single field in an entity.
  */
 function gsb_text_equivalent_view_text_equivalent($type, $id) {
   $entity = entity_load($type, array($id));
